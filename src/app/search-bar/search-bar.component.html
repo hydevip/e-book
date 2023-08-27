@@ -1,0 +1,6 @@
+
+<div
+    class=" w-96 h-8  px-3 border-solid border border-indigo-300 rounded-md bg-slate-50 flex justify-between items-center">
+    <input class="w-full bg-transparent outline-none px-2 text-base" type="text" [(ngModel)]="searchQuery" placeholder="Search...">
+    <fa-icon class="text-indigo-600 cursor-pointer" [icon]="searchIcon" size="lg" (click)="performSearch()"></fa-icon>
+</div>

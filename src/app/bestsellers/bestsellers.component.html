@@ -1,0 +1,7 @@
+<div
+    class="min-h-1/4 flex  flex-col justify-center items-center shadow-lg border border-solid border-indigo-300 rounded-lg py-8">
+    <p class="font-palanquin text-xl">Check the latest bestsellers !</p>
+    <div class="flex justify-center items-center">
+        <app-book-card *ngFor="let book of bestsellers" [book]="book"></app-book-card>
+    </div>
+</div>

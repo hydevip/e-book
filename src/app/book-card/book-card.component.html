@@ -1,0 +1,9 @@
+<div class="w-44 h-52 bg-gray-50 px-2 py-4 rounded-md drop-shadow-lg m-4 flex flex-col justify-center items-center gap-3">
+    <a [routerLink]="['/book-details', book.id]">
+        <img [src]="book.imageLink" class="w-28 h -inset-40" alt="{{book.title}}" >
+        <div class="text-center">
+            <p class="font-palanquin font-semibold text-slate-800">{{book.title}}</p> 
+            <p class="font-palanquin font-light text-slate-500"> by {{book.author}}</p>
+        </div>
+    </a>
+</div>
