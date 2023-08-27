@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { faPhoneVolume } from '@fortawesome/free-solid-svg-icons';
 import {
   faFacebook,
@@ -8,13 +8,14 @@ import {
 import { ActivatedRoute, Params } from '@angular/router';
 import { BooksService } from './books.service';
 import { Book } from '../shared/book.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy{
   title = 'book-shop';
   phoneIcon = faPhoneVolume;
   facebookIcon = faFacebook;
@@ -22,6 +23,7 @@ export class AppComponent implements OnInit {
   linkedinIcon = faLinkedin;
   searchResults: Book[] = [];
   searchByTitle!: string | null;
+  subscriptions: Subscription[]=[];
 
   constructor(
     private booksSrvice: BooksService,
@@ -29,11 +31,13 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('this.route.queryParams:::', this.route.queryParams);
 
     this.route.queryParams.subscribe((params) => {
-      console.log('params::', params);
-      if (!!params && params['search']) this.searchByTitle = params['search'];
+      if (!!params && params['search']){
+        this.searchByTitle = params['search'];
+      } else {
+        this.searchByTitle = null;
+      }
       if (!!this.searchByTitle) {
         this.searchResults = this.booksSrvice
           .getBooks()
@@ -42,6 +46,11 @@ export class AppComponent implements OnInit {
         this.searchResults = []
       }
     });
-    console.log('TEST', this.route.snapshot.queryParamMap);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription: Subscription) => {
+      subscription.unsubscribe();
+    });
   }
 }

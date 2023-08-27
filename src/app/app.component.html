@@ -24,12 +24,12 @@
     <router-outlet></router-outlet>
   </section>
 
-  <section *ngIf="!!searchResults.length" class="mx-9 my-8">
+  <section *ngIf="!!searchResults.length" class="max-w-full mx-44 my-8">
 
     <div
-      class="min-h-1/4 flex  flex-col justify-center items-center shadow-lg border border-solid border-indigo-300 rounded-lg py-8">
+      class="min-h-1/4 w-full flex  flex-col justify-center items-center shadow-lg border border-solid border-indigo-300 rounded-lg py-8">
       <p class="font-palanquin text-xl">Search results</p>
-      <div class="flex justify-center items-center">
+      <div class="flex justify-center items-center w-full flex-wrap">
         <app-book-card *ngFor="let book of searchResults" [book]="book"></app-book-card>
       </div>
     </div>
