@@ -38,6 +38,8 @@ export class AppComponent implements OnInit {
         this.searchResults = this.booksSrvice
           .getBooks()
           .filter((book) => book.title.includes(this.searchByTitle!));
+      } else {
+        this.searchResults = []
       }
     });
     console.log('TEST', this.route.snapshot.queryParamMap);
